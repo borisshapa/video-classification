@@ -8,12 +8,18 @@ from sklearn.metrics import accuracy_score, f1_score
 from torch import nn
 from torch.optim import Adam
 from torch.utils.data import DataLoader
+import torch.nn.functional as F
 
-from cross_entropy import cross_entropy
 from datasets.clip_embeddings_dataset import ClipEmbeddingsDataset
 from datasets.random_frame_dataset import RandomFrameDataset
 from video_classification_utils.common import dict_to_device
 from IPython import display
+
+
+def cross_entropy(input, target):
+    log_softmax = F.log_softmax(input)
+    batch_size = input.shape[0]
+    return -(target * log_softmax).sum() / batch_size
 
 
 def draw_plots(loss_history: List[float], accuracy: List[float], f1: List[float]):

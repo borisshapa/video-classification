@@ -1,4 +1,4 @@
 video_classification.egg-info/
 .idea/
-data/*
-!data/youtube.csv
+resources/data/*
+!resources/data/youtube.csv

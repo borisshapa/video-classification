@@ -9,7 +9,7 @@ def configure_arg_parser() -> ArgumentParser:
     arg_parser.add_argument(
         "--config-path",
         type=str,
-        default="data/config.json",
+        default="resources/data/config.json",
         help="path to json config with mapping video -> category",
     )
     arg_parser.add_argument(

@@ -57,13 +57,13 @@ def train_on_embeddings_dataset(
     log_every: int,
 ):
     train_dataset = ClipEmbeddingsDataset(
-        embeddings_dir="data/embeddings",
-        labels_path="data/train_config.json",
+        embeddings_dir="resources/data/embeddings",
+        labels_path="resources/data/train_config.json",
         average_embeddings=average_embeddings,
     )
     test_dataset = ClipEmbeddingsDataset(
-        embeddings_dir="data/embeddings",
-        labels_path="data/test_config.json",
+        embeddings_dir="resources/data/embeddings",
+        labels_path="resources/data/test_config.json",
         average_embeddings=average_embeddings,
     )
     train_data_loader1 = DataLoader(
@@ -162,13 +162,13 @@ def train_on_images_dataset(
     clip_model, preprocess = clip.load("ViT-B/32", device=device)
 
     train_dataset = RandomFrameDataset(
-        labels_path="data/train_config.json",
-        video_dir="data/videos",
+        labels_path="resources/data/train_config.json",
+        video_dir="resources/data/videos",
         preprocess=preprocess,
     )
     test_dataset = RandomFrameDataset(
-        labels_path="data/test_config.json",
-        video_dir="data/videos",
+        labels_path="resources/data/test_config.json",
+        video_dir="resources/data/videos",
         preprocess=preprocess,
     )
     train_data_loader1 = DataLoader(

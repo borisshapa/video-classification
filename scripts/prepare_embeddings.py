@@ -19,20 +19,20 @@ def configure_arg_parser() -> ArgumentParser:
     arg_parser.add_argument(
         "--youtube-csv-file",
         type=str,
-        default="data/youtube.csv",
+        default="resources/data/youtube.csv",
         help="path to youtube videos dataset (can be downloaded here: https://www.kaggle.com/datasets/rajatrc1705/youtube-videos-dataset)",
     )
 
     arg_parser.add_argument(
         "--save-videos-to",
         type=str,
-        default="data/videos",
+        default="resources/data/videos",
         help="path to the directory where the youtube videos will be saved",
     )
     arg_parser.add_argument(
         "--save-config-to",
         type=str,
-        default="data/config.json",
+        default="resources/data/config.json",
         help="path to the file where the config with the mapping from video id to category will be saved",
     )
     arg_parser.add_argument(
@@ -44,7 +44,7 @@ def configure_arg_parser() -> ArgumentParser:
     arg_parser.add_argument(
         "--save-embeddings-to",
         type=str,
-        default="data/embeddings",
+        default="resources/data/embeddings",
         help="path to the dir where the video embeddings will be saved",
     )
     arg_parser.add_argument(

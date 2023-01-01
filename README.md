@@ -134,7 +134,7 @@ Embedding is converted to logits with one linear layer.
 
 A random frame for each video is fixed and determined by the hash function of the video id:
 
-$$\text{frame_ind} = \text{hash(video_id)} % \text{total_frame_count}$$
+$$\text{frame\_ind} = \text{hash(video\_id)} % \text{total\_frame\_count}$$
 
 #### Mixup
 ![](resources/images/random_frame_mixup.png)

@@ -65,6 +65,71 @@ The split data statistics are as follows:
   * history: 30
 
 ## Models
+Ideas for models are taken from the article [CLIP4Clip](https://arxiv.org/abs/2104.08860).
+The classic way of training a model is compared to training with [Mixup](https://arxiv.org/abs/1710.09412).
+
+### Linear classifier
+![](resources/images/linear.png)
+
+The video vector is obtained by averaging the vectors for the frames. This vector is converted to logits by a line layer.
+
+#### Mixup
+![](resources/images/linear_mixup.png)
+
+In this case, the mixup does not add images, but video embeddings.
+
+$$\lambda \cdot embedding1 + (1 - \lambda) \cdot embedding2 = embedding$$
+
+Ground truth one-hot vectors are added with the same coefficients:
+
+$$\lambda \cdot target1 + (1 - \lambda) \cdot target2 = target$$
+
+```python
+for batch in zip(train_data_loader1, train_data_loader2):
+    optimizer.zero_grad()
+
+    lam = np.random.beta(alpha, alpha)
+    batch1, batch2 = batch
+    batch = {
+        "embeddings": lam * batch1["embeddings"]
+        + (1 - lam) * batch2["embeddings"],
+        "labels": lam * batch1["labels"] + (1 - lam) * batch2["labels"],
+    }
+```
+
+### Transformer Encoder
+![](resources/images/transformer_encoder.png)
+
+In this approach, positional embeddings are added to frame embeddings. The resulting vectors are converted by one transformer encoder layer. The outputs are averaged and converted to logits using a linear layer.
+
+An attention mask is also fed into the transformer encoder, as the model is trained by mini-batch gradient descent.
+
+#### Mixup
+![](resources/images/transformer_encoder_mixup.png)
+
+When using the mixup technique, the frame embedding matrices are added element by element.
+
+```python
+for batch in zip(train_data_loader1, train_data_loader2):
+    optimizer.zero_grad()
+
+    lam = np.random.beta(alpha, alpha)
+    batch1, batch2 = batch
+    batch = {
+        "embeddings": lam * batch1["embeddings"]
+            + (1 - lam) * batch2["embeddings"],
+        "labels": lam * batch1["labels"] + (1 - lam) * batch2["labels"],
+        "attention_mask": torch.logical_or(
+            batch1["attention_mask"].bool(),
+            batch2["attention_mask"].bool()
+        ).float()
+    }
+```
+
+### Classification based on one random frame
+
+
+#### Mixup
 
 ## Results
 

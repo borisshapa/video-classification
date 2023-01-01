@@ -78,11 +78,11 @@ The video vector is obtained by averaging the vectors for the frames. This vecto
 
 In this case, the mixup does not add images, but video embeddings.
 
-$$\lambda \cdot embedding1 + (1 - \lambda) \cdot embedding2 = embedding$$
+$$\lambda \cdot embedding_1 + (1 - \lambda) \cdot embedding_2 = embedding$$
 
 Ground truth one-hot vectors are added with the same coefficients:
 
-$$\lambda \cdot target1 + (1 - \lambda) \cdot target2 = target$$
+$$\lambda \cdot target_1 + (1 - \lambda) \cdot target_2 = target$$
 
 ```python
 for batch in zip(train_data_loader1, train_data_loader2):
@@ -127,9 +127,30 @@ for batch in zip(train_data_loader1, train_data_loader2):
 ```
 
 ### Classification based on one random frame
+![](resources/images/random_frame.png)
 
+A random frame is extracted from the video, preprocessed and converted into an embedding vector using the СLIP model (ViT-B/32).
+Embedding is converted to logits with one linear layer. 
+
+A random frame for each video is fixed and determined by the hash function of the video id:
+
+$$\text{frame_ind} = \text{hash(video_id)} % \text{total_frame_count}$$
 
 #### Mixup
+![](resources/images/random_frame_mixup.png)
+
+This approach uses a classic mixup, in which the original images are mixed.
+
+```python
+for batch in zip(train_data_loader1, train_data_loader2):
+    optimizer.zero_grad()
+
+    lam = np.random.beta(alpha, alpha)
+    (images1, labels1), (images2, labels2) = batch
+    images = lam * images1 + (1 - lam) * images2
+    labels = lam * labels1 + (1 - lam) * labels2
+```
 
 ## Results
+
 

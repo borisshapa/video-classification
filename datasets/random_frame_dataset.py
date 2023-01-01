@@ -34,8 +34,8 @@ class RandomFrameDataset(Dataset):
         )
 
         video_id_hash = int(hashlib.sha256(video_id.encode("utf-8")).hexdigest(), 16)
-        frame_id = video_id_hash % frame_count
-        video_capture.set(cv2.CAP_PROP_POS_FRAMES, frame_id)
+        frame_ind = video_id_hash % frame_count
+        video_capture.set(cv2.CAP_PROP_POS_FRAMES, frame_ind)
         success, frame = video_capture.read()
         rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         tensor_frame = self.preprocess(Image.fromarray(rgb_frame).convert("RGB"))

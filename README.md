@@ -152,5 +152,24 @@ for batch in zip(train_data_loader1, train_data_loader2):
 ```
 
 ## Results
+The value of the metric **f1 micro** is presented.
+
+* Linear with mixup
+  ![](resources/images/train_linear_mixup.png)
+* Linear w/o mixup
+  ![](resources/images/train_linear.png)
+* Transformer Encoder with mixup
+  ![](resources/images/train_transformer_mixup.png)
+* Transformer Encoder w/o mixup
+  ![](resources/images/train_transformer.png)
+* Random frame with mixup
+  ![](resources/images/train_random_frame_mixup.png)
+* Random frame w/o mixup
+  ![](resources/images/train_random_frame.png)
+
+![](resources/images/results.png)
+
+As you can see from the metrics, mixup improves quality in two out of three cases. Also, an interesting fact is that the classification of video topics by a random frame gives, although less compared to other approaches, but still good quality.
+
 
 

@@ -71,7 +71,7 @@ The classic way of training a model is compared to training with [Mixup](https:/
 ### Linear classifier
 ![](resources/images/linear.png)
 
-The video vector is obtained by averaging the vectors for the frames. This vector is converted to logits by a line layer.
+The video vector is obtained by averaging the vectors for the frames. This vector is converted to logits by a linear layer.
 
 #### Mixup
 ![](resources/images/linear_mixup.png)

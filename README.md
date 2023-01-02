@@ -154,7 +154,7 @@ for batch in zip(train_data_loader1, train_data_loader2):
 ```
 
 ## Results
-The value of the metric **f1 micro** is presented.
+The value of the metric **f1 micro** is presented. Training was carried out on _10_ epochs.
 
 * Linear with mixup
   ![](resources/images/train_linear_mixup.png)

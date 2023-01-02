@@ -2,3 +2,5 @@ video_classification.egg-info/
 .idea/
 resources/data/*
 !resources/data/youtube.csv
+__pycache__
+*/__pycache__
